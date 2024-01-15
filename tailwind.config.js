@@ -13,15 +13,45 @@ module.exports = withMT({
         primary: {
           main: '#41b294',
         },
+        colorSecondary: {
+          main: '#f6ba35',
+        },
+      },
+      backgroundSize: {
+        '10-10': '10px 10px',
       },
       keyframes: {
         _zoomInOut: {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.1)' },
         },
+        cloudMove: {
+          '50%': { opacity: 1, transform: 'translateX(0)' },
+          '0%, 100%': { opacity: 0, transform: 'translateX(100%)' },
+        },
+        rotateMessage: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '25%': {
+            transform: 'rotate(30deg)',
+          },
+          '50%': {
+            transform: 'rotate(0deg)',
+          },
+          '75%': {
+            transform: 'rotate(-30deg)',
+          },
+          '100%': {
+            transform: 'rotate(0deg)',
+          },
+        },
       },
       animation: {
         _zoomInOut: '_zoomInOut 1s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+        cloudMove: 'cloudMove 6s linear infinite',
+        cloudMoveSlow: 'cloudMove 10s linear infinite',
+        rotateMessage: 'rotateMessage 4s linear infinite',
       },
     },
   },

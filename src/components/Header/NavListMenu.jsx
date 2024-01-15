@@ -61,14 +61,6 @@ export default function NavListMenu() {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden w-auto grid-cols-2 gap-3 overflow-visible lg:grid">
-          {/* <Card
-            color="blue"
-            shadow={false}
-            variant="gradient"
-            className="col-span-3 grid h-full w-full place-items-center rounded-md"
-          >
-            <RocketLaunchIcon strokeWidth={1} className="h-28 w-28" />
-          </Card> */}
           <ul className="col-span-4 flex w-full flex-col gap-1">
             {renderItems}
           </ul>
