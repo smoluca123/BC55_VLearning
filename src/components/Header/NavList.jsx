@@ -1,8 +1,8 @@
-import {
-  CodeBracketSquareIcon,
-  CubeTransparentIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/solid';
+import { FaCircleInfo } from 'react-icons/fa6';
+import { SiMicrosoftacademic } from 'react-icons/si';
+import { ImPencil } from 'react-icons/im';
+import { MdEvent } from 'react-icons/md';
+
 import NavListMenu from './NavListMenu';
 import { MenuItem, Typography } from '@material-tailwind/react';
 import { createElement } from 'react';
@@ -10,16 +10,20 @@ import { createElement } from 'react';
 // nav list component
 const navListItems = [
   {
-    label: 'Account',
-    icon: UserCircleIcon,
+    label: 'Khóa Học',
+    icon: SiMicrosoftacademic,
   },
   {
-    label: 'Blocks',
-    icon: CubeTransparentIcon,
+    label: 'Blog',
+    icon: ImPencil,
   },
   {
-    label: 'Docs',
-    icon: CodeBracketSquareIcon,
+    label: 'Sự kiện',
+    icon: MdEvent,
+  },
+  {
+    label: 'Thông tin',
+    icon: FaCircleInfo,
   },
 ];
 
@@ -36,9 +40,12 @@ export default function NavList() {
           color="gray"
           className="font-medium text-blue-gray-500"
         >
-          <MenuItem className="flex items-center gap-2 lg:rounded-full">
+          <MenuItem className="group flex items-center gap-2 lg:rounded-md">
             {createElement(icon, { className: 'h-[18px] w-[18px]' })}{' '}
-            <span className="text-gray-900"> {label}</span>
+            <span className="text-gray-900 text-center uppercase font-bold group-hover:text-primary-main transition-colors duration-300">
+              {' '}
+              {label}
+            </span>
           </MenuItem>
         </Typography>
       ))}
