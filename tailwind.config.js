@@ -17,6 +17,9 @@ module.exports = withMT({
           main: '#f6ba35',
         },
       },
+      container: {
+        center: true,
+      },
       backgroundSize: {
         '10-10': '10px 10px',
       },
