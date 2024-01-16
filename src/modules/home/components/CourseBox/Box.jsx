@@ -18,7 +18,7 @@ export default function Box({ title, children, listCheck, className: _class }) {
           listCheck.map((item, index) => {
             const { icon: Icon, content } = item;
             return (
-              <div className="flex items-center mt-1">
+              <div className="flex items-center mt-1" key={index}>
                 <Icon className="min-w-6 w-6 h-6 mr-1" />
                 <Typography variant="small">{item.content}</Typography>
               </div>
