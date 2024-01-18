@@ -54,7 +54,7 @@ export default function NewCoursesItem({ course }) {
           </Typography>
           <Typography
             variant="paragraph"
-            className="min-h-[120px] w-full break-words truncate text-ellipsis whitespace-pre-line overflow-hidden !line-clamp-5"
+            className="min-h-[130px] max-h-[130px] w-full break-words truncate text-ellipsis whitespace-pre-line overflow-hidden !line-clamp-5"
           >
             {moTa}
           </Typography>
