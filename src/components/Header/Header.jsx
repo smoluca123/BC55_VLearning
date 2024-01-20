@@ -15,6 +15,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Bars3Icon } from '@heroicons/react/24/solid';
 import NavList from './NavList';
 import ProfileMenu from './ProfileMenu';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -32,17 +33,15 @@ export default function Header() {
     <Navbar className="mx-auto w-full max-w-full p-2 lg:rounded-md lg:pl-6 fixed top-0 left-0 right-0 z-[999]">
       <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
         <div className="flex max-w-[400px] justify-between items-center">
-          <Typography
-            as="a"
-            href="#"
-            className="mr-4 ml-2 cursor-pointer py-1.5 font-medium hover:animate-_zoomInOut"
-          >
-            <img
-              src="/assets/img/logo.png"
-              alt="Cybersoft Logo"
-              className="w-[200px] lg:w-full"
-            />
-          </Typography>
+          <Link to="/">
+            <Typography className="mr-4 ml-2 cursor-pointer py-1.5 font-medium hover:animate-_zoomInOut">
+              <img
+                src="/assets/img/logo.png"
+                alt="Cybersoft Logo"
+                className="w-[200px] lg:w-full"
+              />
+            </Typography>
+          </Link>
           <div className="hidden lg:block">
             <Input
               label="Tìm kiếm khóa học"
