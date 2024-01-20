@@ -11,7 +11,7 @@ import {
 
 export default function CourseItem() {
   return (
-    <Card className="w-full max-w-[26rem] shadow-lg">
+    <Card className="w-full shadow-lg">
       <CardHeader floated={false} color="blue-gray">
         <img
           src="https://aptechbmt.edu.vn/uploads/news/2019_07/hoc-lap-trinh.jpg"

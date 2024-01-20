@@ -8,14 +8,15 @@ import {
   Button,
   Avatar,
 } from '@material-tailwind/react';
-import PopoverUI from './PopoverUI';
 import {
   BanknotesIcon,
   CalendarDaysIcon,
   ChartBarIcon,
   ClockIcon,
 } from '@heroicons/react/24/solid';
-export default function NewCoursesItem({ course }) {
+export default function CourseItem({ course }) {
+  const randomHours = Math.floor(Math.random() * (52 - 8 + 1) + 8);
+  const calcWeek = Math.round(randomHours / 24);
   const formatVND = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND',
@@ -32,7 +33,7 @@ export default function NewCoursesItem({ course }) {
       <Card className="mt-6 w-full hover:-translate-y-1 transition-transform duration-500">
         <CardHeader
           color="white"
-          className="relative h-[200px] flex justify-center items-center"
+          className="relative h-[400px] sm:h-[200px] flex justify-center items-center"
         >
           <img
             src={hinhAnh}
@@ -61,11 +62,12 @@ export default function NewCoursesItem({ course }) {
           {/*  */}
           <div className="flex justify-between mt-2">
             <Typography variant="paragraph" className="flex place-items-center">
-              <ClockIcon className="w-6 h-6 text-colorSecondary-main mr-2" /> 8
-              giờ
+              <ClockIcon className="w-6 h-6 text-colorSecondary-main mr-2" />
+              {randomHours} giờ
             </Typography>
             <Typography variant="paragraph" className="flex place-items-center">
-              <CalendarDaysIcon className="w-6 h-6 text-red-300 mr-2" /> 4 tuần
+              <CalendarDaysIcon className="w-6 h-6 text-red-300 mr-2" />{' '}
+              {calcWeek} tuần
             </Typography>
             <Typography variant="paragraph" className="flex place-items-center">
               <ChartBarIcon className="w-6 h-6 text-light-blue-300 mr-2" /> Tất
