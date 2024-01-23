@@ -11,37 +11,37 @@ const coursesStatsData = [
     title: 'CHƯƠNG TRÌNH HỌC',
     icon: <MdComputer className="text-4xl text-white" />,
     stats: 300,
-    background: 'bg-[#264653]'
+    background: 'bg-[#264653]',
   },
   {
     title: 'Nhà sáng tạo',
     icon: <FaCamera className="text-4xl text-white" />,
     stats: 10000,
-    background:'bg-primary-main'
+    background: 'bg-primary-main',
   },
   {
     title: 'Nhà thiết kế',
     icon: <FaBriefcase className="text-4xl text-white" />,
     stats: 400,
-    background : 'bg-colorSecondary-main'
+    background: 'bg-colorSecondary-main',
   },
   {
     title: 'Bài giảng',
     icon: <FaBook className="text-4xl text-white" />,
     stats: 3000,
-    background: 'bg-[#f4a261]'
+    background: 'bg-[#f4a261]',
   },
   {
     title: 'Video',
     icon: <FaPlayCircle className="text-4xl text-white" />,
     stats: 40000,
-    background: 'bg-[#ee8959]'
+    background: 'bg-[#ee8959]',
   },
   {
     title: 'Lĩnh vực',
     icon: <FaDiceD20 className="text-4xl text-white" />,
     stats: 200,
-    background: 'bg-[#e76f51]'
+    background: 'bg-[#e76f51]',
   },
 ];
 export default function CoursesStats() {
@@ -61,7 +61,14 @@ export default function CoursesStats() {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 uppercase font-bold my-4 text-white mx-8 flex-wrap">
         {coursesStatsData.map(({ title, icon, stats, background }) => {
-          return <CourseStatsItem className={background} title={title} icon={icon} stats={stats} />;
+          return (
+            <CourseStatsItem
+              className={background}
+              title={title}
+              icon={icon}
+              stats={stats}
+            />
+          );
         })}
       </div>
       <div className="py-12 mx-8">

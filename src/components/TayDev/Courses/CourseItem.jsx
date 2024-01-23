@@ -62,11 +62,11 @@ export default function CourseItem() {
         </div>
         <hr />
 
-        <div className="group mt-4  flex-wrap items-center relative ">
-          <div className="price flex items-center">
+        <div className="group mt-4  flex-wrap items-center relative font-bold ">
+          <div className=" flex items-center ">
             <Typography
-              variant="h6"
-              className="text-gray-500 font-bold line-through"
+              variant="paragraph"
+              className="text-gray-500 text-[14px]  line-through"
             >
               800.000
             </Typography>

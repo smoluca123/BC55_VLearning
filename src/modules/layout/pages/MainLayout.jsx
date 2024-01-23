@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoading } from '../../../components/Loading/slices/loadingSlice';
 import { Footer } from '../../../components/Footer/Footer';
 import CoursesStats from '../../../components/TayDev/Courses/CoursesStats';
+import Events from '../../events/pages/Events';
 
 export default function MainLayout() {
   const { isLoading } = useSelector((state) => state.loading);
@@ -24,6 +25,8 @@ export default function MainLayout() {
         <Outlet />
       </div>
       <Footer />
+      <CoursesStats />
+      <Events />
     </div>
   );
 }
