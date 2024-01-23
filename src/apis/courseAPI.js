@@ -20,4 +20,20 @@ const getCourseListAPI = async () => {
   }
 };
 
-export { getCourseCategoryAPI, getCourseListAPI };
+const getCourseListPaginationAPI = async (page, pageSize) => {
+  try {
+    const { data } = await baseAPI.get(
+      '/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang',
+      {
+        params: {
+          page,
+          pageSize,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    if (error.response) throw error.response?.data?.content;
+  }
+};
+export { getCourseCategoryAPI, getCourseListAPI, getCourseListPaginationAPI };
