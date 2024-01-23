@@ -2,7 +2,6 @@ import React from 'react';
 import { MdComputer } from 'react-icons/md';
 import { FaCamera, FaPlayCircle, FaDiceD20, FaBookmark } from 'react-icons/fa';
 import { FaBriefcase, FaBook } from 'react-icons/fa6';
-import CourseItem from './CourseItem';
 import { Typography } from '@material-tailwind/react';
 import CourseStatsItem from './CourseStatsItem';
 
@@ -61,9 +60,10 @@ export default function CoursesStats() {
 
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 uppercase font-bold my-4 text-white flex-wrap">
-          {coursesStatsData.map(({ title, icon, stats, background }) => {
+          {coursesStatsData.map(({ title, icon, stats, background }, index) => {
             return (
               <CourseStatsItem
+                key={Math.random() * index}
                 className={background}
                 title={title}
                 icon={icon}

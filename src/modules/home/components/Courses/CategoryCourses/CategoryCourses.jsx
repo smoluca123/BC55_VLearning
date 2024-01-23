@@ -1,7 +1,8 @@
 import { Option, Select, Typography } from '@material-tailwind/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { getCourseCategoryAPI } from '../../../../../apis/courseAPI';
-import CourseItem from '../components/CourseItem';
+import CourseItem from '../../../../../components/CourseItem';
+// import CourseItem from '../components/CourseItem';
 
 export default function CateGoryCourses({ courses }) {
   const limit = useRef(4);

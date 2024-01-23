@@ -1,4 +1,4 @@
-import CourseItem from '../components/CourseItem';
+import CourseItem from '../../../../../components/CourseItem';
 
 export default function NewCoursesList({ newCourses }) {
   return (

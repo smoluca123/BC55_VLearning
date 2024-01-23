@@ -1,6 +1,6 @@
 import { Typography } from '@material-tailwind/react';
 import React, { useRef } from 'react';
-import CourseItem from '../components/CourseItem';
+import CourseItem from '../../../../../components/CourseItem';
 
 export default function FeatureCourses({ courses }) {
   const limit = useRef(4);
