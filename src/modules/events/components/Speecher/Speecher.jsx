@@ -64,7 +64,7 @@ export default function Speecher() {
         Các nhà đồng sáng tạo
       </Typography>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2  text-black">
+      <div className="grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2  text-black p-6">
         {speecherData.map(({ nameSpeecher, url, position }) => {
           return (
             <SpeacherItem

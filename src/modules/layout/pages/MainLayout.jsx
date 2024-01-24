@@ -25,6 +25,8 @@ export default function MainLayout() {
         <Outlet />
       </div>
       <Footer />
+      <CoursesStats />
+      <Events />
     </div>
   );
 }
