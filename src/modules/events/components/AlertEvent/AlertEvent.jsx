@@ -4,9 +4,9 @@ import React from 'react';
 export default function AlertEvent() {
   return (
     <div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 my-[80px] px-[80px] place-items">
+      <div className="grid grid-cols-1 lg:grid-cols-2 my-[80px] px-[80px] place-items-center">
         <div
-          className="w-[450px] animate-bounce py-2"
+          className="w-[450px] animate-bounce py-2 "
           style={{ animationDelay: '0.8s', animationDuration: '6s' }}
         >
           <div className="w-[450px]">

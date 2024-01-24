@@ -46,9 +46,9 @@ const coursesStatsData = [
 ];
 export default function CoursesStats() {
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden">
       <div className="bg-[#ffd60a] my-16 py-12 w-full text-white ">
-        <div className="px-12 md:px-24">
+        <div className="px-12">
           <Typography variant="h3" className="uppercase ">
             Khoá học
           </Typography>
@@ -59,7 +59,7 @@ export default function CoursesStats() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 uppercase font-bold my-4 text-white mx-8 flex-wrap">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 uppercase font-bold my-4 text-white mx-8 flex-wrap ">
         {coursesStatsData.map(({ title, icon, stats, background }) => {
           return (
             <CourseStatsItem
@@ -76,7 +76,7 @@ export default function CoursesStats() {
           <FaBookmark className="text-[#ed85ab] text-[24px]" />
           Danh sách khóa học
         </Typography>
-        <div className="flex">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <CourseItem />
           <CourseItem />
           <CourseItem />

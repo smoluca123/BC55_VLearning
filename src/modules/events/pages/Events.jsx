@@ -7,7 +7,7 @@ import TimeEvents from '../components/TimeEvents';
 
 export default function Events() {
   return (
-    <div>
+    <div className="w-full">
       <TimeEvents />
       <AlertEvent />
       <Speecher />

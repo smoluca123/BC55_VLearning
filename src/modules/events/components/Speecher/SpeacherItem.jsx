@@ -8,17 +8,15 @@ export default function SpeakerItem({
   className: classname,
 }) {
   return (
-    <div className="relative w-full  overflow-hidden">
+    <div className="relative w-full">
       <div className="w-full h-full group">
-        <div
-          className={`w-380 h-300 group-hover:opacity-80 transition-opacity duration-300 ease-in-out`}
-        >
+        <div className=" group-hover:opacity-70 transition-opacity duration-300 ease-in-out mx-[2rem]">
           <img src={url} alt="" className="w-full h-full" />
         </div>
+
         <div
-          className={`absolute w-1/6 h-[342px] top-0 left-full bg-gradient-to-r from-transparent to-white transform skew-x-[-25deg] transition-all duration-750 group-hover:left-0`}
-        ></div>
-        <div className={`text-white uppercase font-medium py-6 ${classname}`}>
+          className={`text-white uppercase font-medium py-4 mx-[2rem] ${classname}`}
+        >
           <div className="group-hover:pointer-events-none ">
             <Typography variant="h6" className="font-bold py-2">
               {nameSpeecher}

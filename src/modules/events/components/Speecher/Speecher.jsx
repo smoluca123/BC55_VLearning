@@ -47,14 +47,13 @@ export default function Speecher() {
   ];
   return (
     <div
-      className=" relative z-1 pt-12 bg-cover bg-center "
+      className="z-1 pt-12 bg-cover bg-center w-full"
       style={{
         backgroundImage:
           'url("https://demo2.cybersoft.edu.vn/static/media/backroundTech.a989a5f8.jpg")',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        width: '100%',
         opacity: '0.9',
       }}
     >
@@ -65,7 +64,7 @@ export default function Speecher() {
         Các nhà đồng sáng tạo
       </Typography>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 gap-8 text-black ">
+      <div className="grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2  text-black">
         {speecherData.map(({ nameSpeecher, url, position }) => {
           return (
             <SpeacherItem

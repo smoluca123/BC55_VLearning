@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-tailwind/react';
 export default function TimeEvents() {
   return (
-    <div className="text-white font-bold w-full ">
+    <div className="text-white font-bold w-full mb-[-80px] ">
       <div
         className="uppercase font-medium relative  filter grayscale-50 py-40 px-20 h-full"
         style={{
@@ -13,7 +13,7 @@ export default function TimeEvents() {
           backgroundSize: 'cover',
         }}
       >
-        <div className="absolute w-[600px] top-[-10px] right-[-30px] bg-contain z-1">
+        <div className="absolute w-[600px] top-[-10px] right-0  bg-contain z-1">
           <img
             src="https://demo2.cybersoft.edu.vn/static/media/high-techbrain.2f38d2ab.png"
             alt=""
