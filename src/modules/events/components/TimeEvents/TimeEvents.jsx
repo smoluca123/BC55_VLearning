@@ -19,9 +19,9 @@ export default function TimeEvents() {
             alt=""
           />
         </div>
-        <div className=" flex  font-medium items-center opacity-[0.8]	">
-          <div className=" pr-6 text-[60px]">
-            <Typography variant="h1" className="text-[#ffbe0b] text-[60px]">
+        <div className=" flex gap-4 font-medium items-center opacity-[0.8]	">
+          <div className="">
+            <Typography variant="h1" className="text-[#ffbe0b] ">
               00
             </Typography>
             <Typography variant="h1">
@@ -31,7 +31,7 @@ export default function TimeEvents() {
             </Typography>
           </div>
           <div className="">
-            <Typography variant="h1" className="text-[#fb5607] text-[60px]">
+            <Typography variant="h1" className="text-[#fb5607] ">
               00
             </Typography>
             <Typography variant="h1">
@@ -41,8 +41,8 @@ export default function TimeEvents() {
             </Typography>
           </div>
 
-          <div className="px-6 text-[70px]">
-            <Typography variant="h1" className="text-[#ff006e] text-[60px]">
+          <div className="">
+            <Typography variant="h1" className="text-[#ff006e] ">
               00
             </Typography>
             <Typography variant="h1">
@@ -51,12 +51,9 @@ export default function TimeEvents() {
               </Typography>
             </Typography>
           </div>
-          <div className="text-[60px]">
+          <div className="">
             {' '}
-            <Typography
-              variant="h1"
-              className="text-[#833904] text-[60px] opacity-3"
-            >
+            <Typography variant="h1" className="text-[#833904]  opacity-3">
               00
             </Typography>
             <Typography variant="h1">

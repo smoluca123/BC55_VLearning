@@ -21,6 +21,7 @@ const navListItems = [
   },
   {
     label: 'Sự kiện',
+    href: '/events',
     icon: MdEvent,
   },
   {
