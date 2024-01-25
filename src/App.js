@@ -1,4 +1,5 @@
 import Courses from './modules/coureses/pages/Courses';
+import Events from './modules/events/pages/Events';
 import Home from './modules/home/pages/Home';
 import MainLayout from './modules/layout/pages/MainLayout';
 import { ThemeProvider } from '@material-tailwind/react';
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="/courses" element={<Courses />} />
+            <Route path="/events" element={<Events />} />
           </Route>
         </Routes>
       </BrowserRouter>
