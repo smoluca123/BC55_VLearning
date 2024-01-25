@@ -6,10 +6,10 @@ export default function AlertEvent() {
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 my-[80px] px-[80px] place-items-center">
         <div
-          className="w-[450px] animate-bounce py-2 "
+          className="max-w-[450px] animate-bounce py-2 "
           style={{ animationDelay: '0.8s', animationDuration: '6s' }}
         >
-          <div className="w-[450px]">
+          <div className="w-full">
             <img
               src="https://demo2.cybersoft.edu.vn/static/media/it.ef68b551.png"
               alt=""
@@ -17,7 +17,7 @@ export default function AlertEvent() {
             />
           </div>
         </div>
-        <div className="font-medium">
+        <div className="font-medium text-center md:text-left">
           <Typography variant="h3" className="text-[#9f1f56]">
             SỰ KIỆN CÔNG NGHỆ DÀNH CHO STARTUP
           </Typography>
