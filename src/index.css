@@ -15,3 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Custom Swiper */
+.swiper-pagination-bullet-active {
+  background-color: #41b294 !important;
+}
+
+.customSwiper .swiper-pagination-clickable {
+  bottom: 0px !important;
+}

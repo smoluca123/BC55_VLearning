@@ -2,7 +2,6 @@ import React from 'react';
 import { MdComputer } from 'react-icons/md';
 import { FaCamera, FaPlayCircle, FaDiceD20, FaBookmark } from 'react-icons/fa';
 import { FaBriefcase, FaBook } from 'react-icons/fa6';
-import CourseItem from './CourseItem';
 import { Typography } from '@material-tailwind/react';
 import CourseStatsItem from './CourseStatsItem';
 
@@ -46,9 +45,9 @@ const coursesStatsData = [
 ];
 export default function CoursesStats() {
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full">
       <div className="bg-[#ffd60a] my-16 py-12 w-full text-white ">
-        <div className="px-12">
+        <div className="px-12 md:px-24">
           <Typography variant="h3" className="uppercase ">
             Khoá học
           </Typography>
@@ -59,28 +58,19 @@ export default function CoursesStats() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 uppercase font-bold my-4 text-white mx-8 flex-wrap ">
-        {coursesStatsData.map(({ title, icon, stats, background }) => {
-          return (
-            <CourseStatsItem
-              className={background}
-              title={title}
-              icon={icon}
-              stats={stats}
-            />
-          );
-        })}
-      </div>
-      <div className="py-12 mx-8">
-        <Typography variant="h6" className="text-[28px] flex items-cente">
-          <FaBookmark className="text-[#ed85ab] text-[24px]" />
-          Danh sách khóa học
-        </Typography>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          <CourseItem />
-          <CourseItem />
-          <CourseItem />
-          <CourseItem />
+      <div className="container">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 uppercase font-bold my-4 text-white flex-wrap">
+          {coursesStatsData.map(({ title, icon, stats, background }, index) => {
+            return (
+              <CourseStatsItem
+                key={Math.random() * index}
+                className={background}
+                title={title}
+                icon={icon}
+                stats={stats}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ import {
 } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import { getCourseCategoryAPI } from '../../apis/courseAPI';
+import { NavLink } from 'react-router-dom';
 
 export default function NavListMenu() {
   const [navListMenuItems, setNavListMenuItems] = useState([]);
@@ -27,7 +28,7 @@ export default function NavListMenu() {
   }, []);
 
   const renderItems = navListMenuItems.map(({ maDanhMuc, tenDanhMuc }) => (
-    <a href="#" key={maDanhMuc}>
+    <NavLink to="/" key={maDanhMuc}>
       <MenuItem className="group">
         <Typography
           variant="h6"
@@ -40,25 +41,27 @@ export default function NavListMenu() {
           Các khóa học về {tenDanhMuc}
         </Typography>
       </MenuItem>
-    </a>
+    </NavLink>
   ));
 
   return (
     <>
       <Menu allowHover open={isMenuOpen} handler={setIsMenuOpen}>
         <MenuHandler>
-          <Typography as="a" href="#" variant="small" className="font-normal">
-            <MenuItem className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full uppercase font-bold hover:text-primary-main transition-colors duration-300">
-              <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{' '}
-              Danh Mục{' '}
-              <ChevronDownIcon
-                strokeWidth={2}
-                className={`h-3 w-3 transition-transform ${
-                  isMenuOpen ? 'rotate-180' : ''
-                }`}
-              />
-            </MenuItem>
-          </Typography>
+          <NavLink to="/">
+            <Typography as="a" href="#" variant="small" className="font-normal">
+              <MenuItem className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full uppercase font-bold hover:text-primary-main transition-colors duration-300">
+                <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{' '}
+                Danh Mục{' '}
+                <ChevronDownIcon
+                  strokeWidth={2}
+                  className={`h-3 w-3 transition-transform ${
+                    isMenuOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </MenuItem>
+            </Typography>
+          </NavLink>
         </MenuHandler>
         <MenuList className="hidden w-auto grid-cols-2 gap-3 overflow-visible lg:grid">
           <ul className="col-span-4 flex w-full flex-col gap-1">

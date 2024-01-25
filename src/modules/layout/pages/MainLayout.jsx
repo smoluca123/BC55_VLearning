@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoading } from '../../../components/Loading/slices/loadingSlice';
 import { Footer } from '../../../components/Footer/Footer';
 
-
 export default function MainLayout() {
   const { isLoading } = useSelector((state) => state.loading);
   const dispatch = useDispatch();
