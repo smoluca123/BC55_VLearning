@@ -16,9 +16,11 @@ import { Bars3Icon } from '@heroicons/react/24/solid';
 import NavList from './NavList';
 import ProfileMenu from './ProfileMenu';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { currentUser } = useSelector((state) => state.auth);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
@@ -66,22 +68,31 @@ export default function Header() {
         </IconButton>
 
         <div className="md:w-[400px] w-auto text-right">
-          <Menu>
-            <MenuHandler>
-              <Button className="hover:text-primary-main hover:bg-white">
-                Thành Viên
-              </Button>
-            </MenuHandler>
-            <MenuList>
-              <MenuItem className="text-center hover:!text-primary-main">
-                Đăng ký
-              </MenuItem>
-              <MenuItem className="text-center hover:!text-primary-main">
-                Đăng nhập
-              </MenuItem>
-            </MenuList>
-          </Menu>
           {/* <ProfileMenu /> */}
+          {currentUser ? (
+            <ProfileMenu />
+          ) : (
+            <Menu>
+              <MenuHandler>
+                <Button className="hover:text-primary-main hover:bg-white">
+                  Thành Viên
+                </Button>
+              </MenuHandler>
+              <MenuList>
+                <Link to="/user?page=signup">
+                  <MenuItem className="text-center hover:!text-primary-main">
+                    Đăng ký
+                  </MenuItem>
+                </Link>
+
+                <Link to="/user">
+                  <MenuItem className="text-center hover:!text-primary-main">
+                    Đăng nhập
+                  </MenuItem>
+                </Link>
+              </MenuList>
+            </Menu>
+          )}
         </div>
       </div>
       <MobileNav open={isNavOpen} className="overflow-scroll">

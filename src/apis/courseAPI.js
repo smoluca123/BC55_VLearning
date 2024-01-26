@@ -5,7 +5,7 @@ const getCourseCategoryAPI = async () => {
     const { data } = await baseAPI.get('/QuanLyKhoaHoc/LayDanhMucKhoaHoc');
     return data;
   } catch (error) {
-    if (error.response) throw error.response?.data?.content;
+    if (error.response) throw error.response?.data;
     throw error.message;
   }
 };
@@ -15,7 +15,7 @@ const getCourseListAPI = async () => {
     const { data } = await baseAPI.get('/QuanLyKhoaHoc/LayDanhSachKhoaHoc');
     return data;
   } catch (error) {
-    if (error.response) throw error.response?.data?.content;
+    if (error.response) throw error.response?.data;
     throw error.message;
   }
 };
@@ -33,7 +33,8 @@ const getCourseListPaginationAPI = async (page, pageSize) => {
     );
     return data;
   } catch (error) {
-    if (error.response) throw error.response?.data?.content;
+    if (error.response) throw error.response?.data;
+    throw error.message;
   }
 };
 export { getCourseCategoryAPI, getCourseListAPI, getCourseListPaginationAPI };
