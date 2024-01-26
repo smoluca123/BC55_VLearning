@@ -49,12 +49,17 @@ module.exports = withMT({
             transform: 'rotate(0deg)',
           },
         },
+        _fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
       },
       animation: {
         _zoomInOut: '_zoomInOut 1s cubic-bezier(0.4, 0, 0.2, 1) infinite',
         cloudMove: 'cloudMove 6s linear infinite',
         cloudMoveSlow: 'cloudMove 10s linear infinite',
         rotateMessage: 'rotateMessage 4s linear infinite',
+        _fadeIn: '_fadeIn 1s linear',
       },
     },
   },
