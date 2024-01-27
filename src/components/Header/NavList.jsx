@@ -35,7 +35,7 @@ export default function NavList() {
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <NavListMenu />
       {navListItems.map(({ label, icon, href = '#' }, key) => (
-        <NavLink to={href}>
+        <NavLink to={href} key={Math.random() * key}>
           <Typography
             key={label}
             variant="small"

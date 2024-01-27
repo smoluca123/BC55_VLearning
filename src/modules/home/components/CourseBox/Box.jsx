@@ -1,6 +1,5 @@
 import { Typography } from '@material-tailwind/react';
 import React from 'react';
-import { CheckIcon } from '@heroicons/react/24/solid';
 
 export default function Box({ title, children, listCheck, className: _class }) {
   return (
