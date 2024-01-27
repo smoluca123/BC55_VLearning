@@ -4,6 +4,7 @@ import Home from './modules/home/pages/Home';
 import MainLayout from './modules/layout/pages/MainLayout';
 import { ThemeProvider } from '@material-tailwind/react';
 import User from './modules/user/pages/User';
+import CourseDetail from './modules/courseDetail/page/CourseDetail';
 
 const { BrowserRouter, Routes, Route } = require('react-router-dom');
 
@@ -17,6 +18,10 @@ function App() {
             <Route path="/courses" element={<Courses />} />
             <Route path="/events" element={<Events />} />
             <Route path="/user" element={<User />}></Route>
+            <Route
+              path="/course/:biDanh/:idCourse"
+              element={<CourseDetail />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

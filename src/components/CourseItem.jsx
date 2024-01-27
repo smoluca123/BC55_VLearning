@@ -14,6 +14,7 @@ import {
   ChartBarIcon,
   ClockIcon,
 } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
 export default function CourseItem({ course }) {
   const randomHours = Math.floor(Math.random() * (52 - 8 + 1) + 8);
   const calcWeek = Math.round(randomHours / 24);
@@ -22,9 +23,11 @@ export default function CourseItem({ course }) {
     currency: 'VND',
   });
   const {
+    maKhoaHoc,
     tenKhoaHoc,
     hinhAnh,
     moTa,
+    biDanh,
     nguoiTao: { hoTen },
     danhMucKhoaHoc: { tenDanhMucKhoaHoc },
   } = course;
@@ -100,9 +103,11 @@ export default function CourseItem({ course }) {
               </Typography>
             </div>
           </div>
-          <Button className="mt-4 w-full bg-primary-main hover:bg-white hover:text-black">
-            Xem chi tiết
-          </Button>
+          <Link to={`/course/${biDanh}/${maKhoaHoc}`}>
+            <Button className="mt-4 w-full bg-primary-main hover:bg-white hover:text-black">
+              Xem chi tiết
+            </Button>
+          </Link>
         </CardFooter>
       </Card>
       {/* <PopoverUI course={course}>

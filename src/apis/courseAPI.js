@@ -37,4 +37,23 @@ const getCourseListPaginationAPI = async (page, pageSize) => {
     throw error.message;
   }
 };
-export { getCourseCategoryAPI, getCourseListAPI, getCourseListPaginationAPI };
+
+const getCourseDetailAPI = async (courseId) => {
+  try {
+    const { data } = await baseAPI.get('/QuanLyKhoaHoc/LayThongTinKhoaHoc', {
+      params: {
+        maKhoaHoc: courseId,
+      },
+    });
+    return data;
+  } catch (error) {
+    if (error.response) throw error.response?.data;
+    throw error.message;
+  }
+};
+export {
+  getCourseCategoryAPI,
+  getCourseListAPI,
+  getCourseListPaginationAPI,
+  getCourseDetailAPI,
+};
