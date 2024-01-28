@@ -5,6 +5,9 @@ import MainLayout from './modules/layout/pages/MainLayout';
 import { ThemeProvider } from '@material-tailwind/react';
 import User from './modules/user/pages/User';
 import CourseDetail from './modules/courseDetail/page/CourseDetail';
+import Auth from './modules/user/components/Auth/Auth';
+import Profile from './modules/profile/pages/Profile';
+import PrivateRouter from './Router/PrivateRouter';
 import About from './modules/Infomation/pages/About';
 
 const { BrowserRouter, Routes, Route } = require('react-router-dom');
@@ -18,7 +21,17 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/user" element={<User />}></Route>
+            <Route path="/user" element={<User />}>
+              <Route index element={<Auth />} />
+              <Route
+                path="profile"
+                element={
+                  <PrivateRouter>
+                    <Profile />
+                  </PrivateRouter>
+                }
+              />
+            </Route>
             <Route path="/media" element={<About />} />
             <Route
               path="/course/:biDanh/:idCourse"

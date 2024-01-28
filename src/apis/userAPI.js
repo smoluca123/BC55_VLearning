@@ -1,5 +1,17 @@
 import baseAPI from './baseAPI';
 
+const getUserTypeAPI = async () => {
+  try {
+    const { data } = await baseAPI.get(
+      '/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung'
+    );
+    return data;
+  } catch (error) {
+    if (error.response) throw error.response?.data;
+    throw error.message;
+  }
+};
+
 const signinAPI = async (credentials) => {
   try {
     const { data } = await baseAPI.post(
@@ -25,4 +37,4 @@ const signupAPI = async (credentials) => {
   }
 };
 
-export { signinAPI, signupAPI };
+export { signinAPI, signupAPI, getUserTypeAPI };
