@@ -8,6 +8,7 @@ import CourseDetail from './modules/courseDetail/page/CourseDetail';
 import Auth from './modules/user/components/Auth/Auth';
 import Profile from './modules/profile/pages/Profile';
 import PrivateRouter from './Router/PrivateRouter';
+import About from './modules/Infomation/pages/About';
 
 const { BrowserRouter, Routes, Route } = require('react-router-dom');
 
@@ -31,6 +32,7 @@ function App() {
                 }
               />
             </Route>
+            <Route path="/media" element={<About />} />
             <Route
               path="/course/:biDanh/:idCourse"
               element={<CourseDetail />}
