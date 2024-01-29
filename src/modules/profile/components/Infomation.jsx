@@ -6,25 +6,40 @@ import {
   TabPanel,
 } from '@material-tailwind/react';
 import InfomationBox from './InfomationBox';
+import { useState } from 'react';
+import MyCourses from './MyCourses/';
+const data = [
+  {
+    label: 'Thông tin cá nhân',
+    value: 'infomation',
+    element: <InfomationBox />,
+  },
+  {
+    label: 'Khóa học',
+    value: 'courses',
+    element: <MyCourses />,
+  },
+];
 export default function Infomation() {
-  const data = [
-    {
-      label: 'Thông tin cá nhân',
-      value: 'infomation',
-      element: <InfomationBox />,
-    },
-    {
-      label: 'Khóa học',
-      value: 'courses',
-      element: <h1>Khoa hoc</h1>,
-    },
-  ];
+  const [activeTab, setActiveTab] = useState(data[0].value);
 
   return (
-    <Tabs value="html">
-      <TabsHeader>
+    <Tabs value={activeTab}>
+      <TabsHeader
+        className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
+        indicatorProps={{
+          className:
+            'bg-transparent border-b-2 border-primary-main shadow-none rounded-none',
+        }}
+      >
         {data.map(({ label, value }) => (
-          <Tab key={value} value={value}>
+          <Tab
+            key={value}
+            value={value}
+            onClick={() => {
+              setActiveTab(value);
+            }}
+          >
             {label}
           </Tab>
         ))}

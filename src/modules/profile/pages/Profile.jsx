@@ -19,11 +19,11 @@ export default function Profile() {
         </div>
       </div>
       <div className="container mt-8 py-8 bg-white rounded-lg">
-        <div className="flex">
-          <div className="w-1/4">
+        <div className="flex flex-col md:flex-row">
+          <div className="md:w-1/4">
             <ProfileCard />
           </div>
-          <div className="w-3/4">
+          <div className="md:w-3/4">
             <Infomation />
           </div>
         </div>

@@ -9,6 +9,8 @@ import Auth from './modules/user/components/Auth/Auth';
 import Profile from './modules/profile/pages/Profile';
 import PrivateRouter from './Router/PrivateRouter';
 import About from './modules/Infomation/pages/About';
+import Blog from './modules/Blog/Pages/Blog';
+import CategoryCourse from './modules/categoryCourse/pages/CategoryCourse';
 
 const { BrowserRouter, Routes, Route } = require('react-router-dom');
 
@@ -32,10 +34,15 @@ function App() {
                 }
               />
             </Route>
+            <Route path="/blog" element={<Blog />} />
             <Route path="/media" element={<About />} />
             <Route
               path="/course/:biDanh/:idCourse"
               element={<CourseDetail />}
+            />
+            <Route
+              path="/category-course/:categoryId"
+              element={<CategoryCourse />}
             />
           </Route>
         </Routes>

@@ -7,7 +7,7 @@ const baseAPI = axios.create({
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA1NSIsIkhldEhhblN0cmluZyI6IjI0LzA1LzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcxNjUwODgwMDAwMCIsIm5iZiI6MTY4Nzg4NTIwMCwiZXhwIjoxNzE2NjU2NDAwfQ.HsoestvkIN5Kub3jnAr8UddrPugJcxCsAm4QfMi4ZbU',
   },
   params: {
-    maNhom: 'GP02',
+    maNhom: 'GP01',
   },
 });
 
@@ -25,7 +25,6 @@ baseAPI.interceptors.request.use(
 baseAPI.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(error);
     if (error.response.status === 401) {
       localStorage.removeItem('currentUser');
       window.location.reload();
