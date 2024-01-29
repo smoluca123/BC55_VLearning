@@ -18,6 +18,8 @@ import {
 import { createElement, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../modules/user/slices/authSlice';
+import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 export default function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,19 +35,12 @@ export default function ProfileMenu() {
   const profileMenuItems = [
     {
       label: 'My Profile',
+      href: '/user/profile',
       icon: UserCircleIcon,
     },
     {
       label: 'Edit Profile',
       icon: Cog6ToothIcon,
-    },
-    {
-      label: 'Inbox',
-      icon: InboxArrowDownIcon,
-    },
-    {
-      label: 'Help',
-      icon: LifebuoyIcon,
     },
     {
       label: 'Sign Out',
@@ -80,34 +75,44 @@ export default function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon, onClick }, key) => {
+        {profileMenuItems.map(({ label, icon, onClick, href = '#' }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
-            <MenuItem
+            <NavLink
               key={label}
-              onClick={() => {
-                closeMenu();
-                onClick && onClick();
-              }}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem
-                  ? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
-                  : ''
-              }`}
+              to={href}
+              className={({ isActive }) =>
+                classNames('', {
+                  '!text-primary-main': isActive,
+                })
+              }
             >
-              {createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`,
-                strokeWidth: 2,
-              })}
-              <Typography
-                as="span"
-                variant="small"
-                className="font-normal"
-                color={isLastItem ? 'red' : 'inherit'}
+              <MenuItem
+                onClick={() => {
+                  closeMenu();
+                  onClick && onClick();
+                }}
+                className={`flex items-center gap-2 rounded ${
+                  isLastItem
+                    ? 'hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10'
+                    : ''
+                }`}
               >
-                {label}
-              </Typography>
-            </MenuItem>
+                {createElement(icon, {
+                  className: `h-4 w-4 ${isLastItem ? 'text-red-500' : ''}`,
+                  strokeWidth: 2,
+                })}
+
+                <Typography
+                  as="span"
+                  variant="small"
+                  className="font-normal"
+                  color={isLastItem ? 'red' : 'inherit'}
+                >
+                  {label}
+                </Typography>
+              </MenuItem>
+            </NavLink>
           );
         })}
       </MenuList>

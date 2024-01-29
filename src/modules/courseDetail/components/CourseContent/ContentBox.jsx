@@ -18,7 +18,7 @@ export default function ContentBox({ title, contentList }) {
 
       <div className="mt-4">
         {contentList.map((content, index) => (
-          <ContentItem content={content} />
+          <ContentItem key={Math.random() * index} content={content} />
         ))}
       </div>
     </div>

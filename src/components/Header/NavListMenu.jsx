@@ -19,7 +19,6 @@ export default function NavListMenu() {
       try {
         const data = await getCourseCategoryAPI();
         setNavListMenuItems(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -28,7 +27,7 @@ export default function NavListMenu() {
   }, []);
 
   const renderItems = navListMenuItems.map(({ maDanhMuc, tenDanhMuc }) => (
-    <NavLink to="/" key={maDanhMuc}>
+    <NavLink to={`/category-course/${maDanhMuc}`} key={maDanhMuc}>
       <MenuItem className="group">
         <Typography
           variant="h6"

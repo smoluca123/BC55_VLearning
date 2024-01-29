@@ -8,12 +8,51 @@ import {
   Button,
 } from '@material-tailwind/react';
 import SidebarCourseDetail from './SidebarCourseDetail';
+import { useSelector } from 'react-redux';
+import { joinCourseAPI } from '../../../../apis/courseAPI';
+import { useEffect, useState } from 'react';
+import { getUserInfoAPI } from '../../../../apis/userAPI';
 export default function Sidebar({ course }) {
-  const { tenKhoaHoc, hinhAnh } = course;
+  const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [isJoin, setIsJoin] = useState(false);
+  const getUserInfo = async () => {
+    try {
+      const data = await getUserInfoAPI();
+      setUserData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { tenKhoaHoc, maKhoaHoc, hinhAnh } = course;
   const formatVND = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND',
   });
+  const { currentUser } = useSelector((state) => state.auth);
+
+  const handleJoinCourse = async () => {
+    try {
+      setIsLoading(true);
+      await joinCourseAPI(maKhoaHoc, currentUser.taiKhoan);
+      setIsJoin(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    if (!userData) return;
+    const joined = userData.chiTietKhoaHocGhiDanh.find(
+      (course) => course.maKhoaHoc == maKhoaHoc
+    );
+    setIsJoin(!!joined);
+  }, [maKhoaHoc, userData]);
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   return (
     <Card className="mt-6 w-full">
       <CardHeader
@@ -31,12 +70,24 @@ export default function Sidebar({ course }) {
             {formatVND.format(500000)}
           </Typography>
         </div>
-        <Button
-          className="border-primary-main text-primary-main hover:text-white hover:bg-primary-main w-full"
-          variant="outlined"
-        >
-          Đăng ký
-        </Button>
+        {isJoin ? (
+          <Button
+            className="border-primary-main text-primary-main hover:text-white hover:bg-primary-main w-full"
+            variant="outlined"
+            disabled={isJoin}
+          >
+            Đã ghi danh
+          </Button>
+        ) : (
+          <Button
+            className="border-primary-main text-primary-main hover:text-white hover:bg-primary-main w-full"
+            variant="outlined"
+            onClick={handleJoinCourse}
+            disabled={isLoading}
+          >
+            Đăng ký
+          </Button>
+        )}
       </CardHeader>
       <CardBody>
         <Typography variant="h5" color="blue-gray" className="mb-2 truncate">

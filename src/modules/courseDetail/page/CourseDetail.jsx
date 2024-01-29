@@ -5,6 +5,7 @@ import { Typography } from '@material-tailwind/react';
 import Detail from '../components/Detail';
 import Sidebar from '../components/Sidebar';
 import FeatureCourses from '../../home/components/Courses/FeatureCourses/FeatureCourses';
+import { Toaster } from 'react-hot-toast';
 export default function CourseDetail() {
   const { idCourse } = useParams();
 
@@ -56,6 +57,7 @@ export default function CourseDetail() {
         </div>
         {courses && <FeatureCourses courses={courses} />}
       </div>
+      <Toaster position="top-right" />
     </div>
   );
 }

@@ -7,6 +7,7 @@ import NavListMenu from './NavListMenu';
 import { MenuItem, Typography } from '@material-tailwind/react';
 import { createElement } from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 // nav list component
 const navListItems = [
@@ -17,6 +18,7 @@ const navListItems = [
   },
   {
     label: 'Blog',
+    href: '/blog',
     icon: ImPencil,
   },
   {
@@ -26,6 +28,7 @@ const navListItems = [
   },
   {
     label: 'Thông tin',
+    href: '/media',
     icon: FaCircleInfo,
   },
 ];
@@ -35,22 +38,31 @@ export default function NavList() {
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <NavListMenu />
       {navListItems.map(({ label, icon, href = '#' }, key) => (
-        <NavLink to={href} key={Math.random() * key}>
-          <Typography
-            key={label}
-            variant="small"
-            color="gray"
-            className="font-medium text-blue-gray-500"
+        <Typography
+          key={label}
+          variant="small"
+          color="gray"
+          className="font-medium text-blue-gray-500"
+        >
+          <NavLink
+            to={href}
+            key={Math.random() * key}
+            className={({ isActive, isPending }) =>
+              classNames(
+                'text-gray-900 text-center uppercase font-bold group-hover:text-primary-main transition-colors duration-300',
+                {
+                  '!text-primary-main': isActive,
+                  'text-gray-500': isPending,
+                }
+              )
+            }
           >
             <MenuItem className="group flex items-center gap-2 lg:rounded-md">
               {createElement(icon, { className: 'h-[18px] w-[18px]' })}{' '}
-              <span className="text-gray-900 text-center uppercase font-bold group-hover:text-primary-main transition-colors duration-300">
-                {' '}
-                {label}
-              </span>
+              <span className=""> {label}</span>
             </MenuItem>
-          </Typography>
-        </NavLink>
+          </NavLink>
+        </Typography>
       ))}
     </ul>
   );
