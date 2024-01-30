@@ -11,6 +11,9 @@ export default function CoursesList() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') >= 1 ? searchParams.get('page') : 1;
+  const searchText = searchParams.get('search')
+    ? searchParams.get('search')
+    : '';
   const limitOnPage = useRef(8);
   const [totalPage, setTotalPage] = useState(null);
   const [currentPage, setCurrentPage] = useState(page);
@@ -35,22 +38,26 @@ export default function CoursesList() {
         setIsLoading(true);
         const data = await getCourseListPaginationAPI(
           currentPage,
-          limitOnPage.current
+          limitOnPage.current,
+          { tenKhoaHoc: searchText }
         );
         const { items, totalPages: _totalPage } = data;
         setCourses(items);
         setTotalPage(_totalPage);
         handleBugCurrentPage(_totalPage);
-        navigate(`?page=${currentPage}`);
-        console.log(data);
       } catch (error) {
+        searchParams.set('search', '');
+        searchParams.set('page', '1');
+        setTotalPage(null);
+        setCourses(null);
         console.log(error);
       } finally {
+        navigate(`?page=${currentPage}&search=${searchText}`);
         setIsLoading(false);
       }
     };
     fetchCoursesOnPage();
-  }, [currentPage]);
+  }, [currentPage, searchText]);
 
   return (
     <>
@@ -59,7 +66,12 @@ export default function CoursesList() {
           <FaBookmark className="text-[#ed85ab] text-[24px]" />
           Danh sách khóa học
         </Typography>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {(!courses || isLoading) && (
+          <Typography variant="h1" className="my-4">
+            Không tìm thấy khóa học
+          </Typography>
+        )}
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {!isLoading &&
             courses &&
             courses.map((course) => (
