@@ -45,10 +45,14 @@ export default function CoursesList() {
         setCourses(items);
         setTotalPage(_totalPage);
         handleBugCurrentPage(_totalPage);
-        navigate(`?page=${currentPage}&search=${searchText}`);
       } catch (error) {
+        searchParams.set('search', '');
+        searchParams.set('page', '1');
+        setTotalPage(null);
+        setCourses(null);
         console.log(error);
       } finally {
+        navigate(`?page=${currentPage}&search=${searchText}`);
         setIsLoading(false);
       }
     };
@@ -62,7 +66,12 @@ export default function CoursesList() {
           <FaBookmark className="text-[#ed85ab] text-[24px]" />
           Danh sách khóa học
         </Typography>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {(!courses || isLoading) && (
+          <Typography variant="h1" className="my-4">
+            Không tìm thấy khóa học
+          </Typography>
+        )}
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {!isLoading &&
             courses &&
             courses.map((course) => (

@@ -14,9 +14,7 @@ export default function SearchBox() {
   const submitBtn = useRef();
   const handleSearchCourse = (value) => {
     const { searchText } = value;
-    if (searchText) {
-      navigate(`/courses?search=${searchText}`);
-    }
+    navigate(`/courses?search=${searchText}`);
   };
   return (
     <form onSubmit={handleSubmit(handleSearchCourse)}>
