@@ -17,6 +17,7 @@ import NavList from './NavList';
 import ProfileMenu from './ProfileMenu';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import SearchBox from './SearchBox';
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -45,13 +46,7 @@ export default function Header() {
             </Typography>
           </Link>
           <div className="hidden lg:block">
-            <Input
-              label="Tìm kiếm khóa học"
-              className="group"
-              icon={
-                <FaSearch className="hover:text-black cursor-pointer transition-colors duration-300" />
-              }
-            />
+            <SearchBox />
           </div>
         </div>
         <div className="hidden lg:block">

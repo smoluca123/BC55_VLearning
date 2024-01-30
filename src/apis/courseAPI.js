@@ -34,7 +34,7 @@ const getCourseListAPI = async () => {
   }
 };
 
-const getCourseListPaginationAPI = async (page, pageSize) => {
+const getCourseListPaginationAPI = async (page, pageSize, searchParams) => {
   try {
     const { data } = await baseAPI.get(
       '/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang',
@@ -42,6 +42,7 @@ const getCourseListPaginationAPI = async (page, pageSize) => {
         params: {
           page,
           pageSize,
+          ...searchParams,
         },
       }
     );

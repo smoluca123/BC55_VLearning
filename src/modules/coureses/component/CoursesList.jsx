@@ -11,6 +11,9 @@ export default function CoursesList() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const page = searchParams.get('page') >= 1 ? searchParams.get('page') : 1;
+  const searchText = searchParams.get('search')
+    ? searchParams.get('search')
+    : '';
   const limitOnPage = useRef(8);
   const [totalPage, setTotalPage] = useState(null);
   const [currentPage, setCurrentPage] = useState(page);
@@ -35,14 +38,14 @@ export default function CoursesList() {
         setIsLoading(true);
         const data = await getCourseListPaginationAPI(
           currentPage,
-          limitOnPage.current
+          limitOnPage.current,
+          { tenKhoaHoc: searchText }
         );
         const { items, totalPages: _totalPage } = data;
         setCourses(items);
         setTotalPage(_totalPage);
         handleBugCurrentPage(_totalPage);
-        navigate(`?page=${currentPage}`);
-        console.log(data);
+        navigate(`?page=${currentPage}&search=${searchText}`);
       } catch (error) {
         console.log(error);
       } finally {
@@ -50,7 +53,7 @@ export default function CoursesList() {
       }
     };
     fetchCoursesOnPage();
-  }, [currentPage]);
+  }, [currentPage, searchText]);
 
   return (
     <>
