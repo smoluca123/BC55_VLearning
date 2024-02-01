@@ -34,7 +34,13 @@ export default function MyCourseList({ watch }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       {fillCourses.map((course) => {
-        return <MyCourseItem course={course} />;
+        return (
+          <MyCourseItem
+            key={course.maKhoaHoc}
+            course={course}
+            fetchCourse={getMyCourses}
+          />
+        );
       })}
     </div>
   );

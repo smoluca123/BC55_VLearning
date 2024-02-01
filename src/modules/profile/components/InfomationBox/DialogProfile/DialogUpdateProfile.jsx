@@ -51,6 +51,7 @@ export default function DialogUpdateProfile({
       email: userData.email,
       soDT: userData.soDT,
       taiKhoan: userData.taiKhoan,
+      matKhau: userData.matKhau,
       maNhom: userData.maNhom,
       maLoaiNguoiDung: userData.maLoaiNguoiDung,
     },

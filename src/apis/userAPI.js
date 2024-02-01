@@ -1,5 +1,25 @@
 import baseAPI from './baseAPI';
 
+const getListUserPaginationAPI = async (page, limit, searchField) => {
+  try {
+    console.log(searchField);
+    const { data } = await baseAPI.get(
+      '/QuanLyNguoiDung/LayDanhSachNguoiDung_PhanTrang',
+      {
+        params: {
+          page,
+          limit,
+          ...searchField,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    if (error.response) throw error.response?.data;
+    throw error.message;
+  }
+};
+
 const getUserTypeAPI = async () => {
   try {
     const { data } = await baseAPI.get(
@@ -60,4 +80,11 @@ const updateUserAPI = async (credentials) => {
   }
 };
 
-export { signinAPI, signupAPI, getUserTypeAPI, updateUserAPI, getUserInfoAPI };
+export {
+  signinAPI,
+  signupAPI,
+  getUserTypeAPI,
+  updateUserAPI,
+  getUserInfoAPI,
+  getListUserPaginationAPI,
+};

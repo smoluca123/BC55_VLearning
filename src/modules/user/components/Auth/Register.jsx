@@ -17,6 +17,7 @@ import baseAPI from '../../../../apis/baseAPI';
 import { signupAPI } from '../../../../apis/userAPI';
 import { useDispatch } from 'react-redux';
 import { signin } from '../../slices/authSlice';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const validationSchema = object({
   taiKhoan: string().required('Tên không được để trống'),
@@ -31,6 +32,9 @@ export default function Register({ onToggle }) {
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -60,7 +64,10 @@ export default function Register({ onToggle }) {
       setIsSuccess(true);
 
       // Sign in
-      dispatch(signin(data)).unwrap();
+      await dispatch(signin(data)).unwrap();
+
+      const url = searchParams.get('from') || '/';
+      navigate(url);
     } catch (error) {
       console.log(error);
       setError({ isError: true, message: error });

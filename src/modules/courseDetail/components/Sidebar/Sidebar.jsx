@@ -12,10 +12,16 @@ import { useSelector } from 'react-redux';
 import { joinCourseAPI } from '../../../../apis/courseAPI';
 import { useEffect, useState } from 'react';
 import { getUserInfoAPI } from '../../../../apis/userAPI';
+import { useLocation, useNavigate } from 'react-router-dom';
 export default function Sidebar({ course }) {
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isJoin, setIsJoin] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { currentUser } = useSelector((state) => state.auth);
   const getUserInfo = async () => {
     try {
       const data = await getUserInfoAPI();
@@ -30,10 +36,14 @@ export default function Sidebar({ course }) {
     style: 'currency',
     currency: 'VND',
   });
-  const { currentUser } = useSelector((state) => state.auth);
 
   const handleJoinCourse = async () => {
     try {
+      if (!currentUser) {
+        const { pathname } = location;
+        navigate(`/user?page=login&from=${pathname}`);
+        return;
+      }
       setIsLoading(true);
       await joinCourseAPI(maKhoaHoc, currentUser.taiKhoan);
       setIsJoin(true);
@@ -51,6 +61,7 @@ export default function Sidebar({ course }) {
     setIsJoin(!!joined);
   }, [maKhoaHoc, userData]);
   useEffect(() => {
+    if (!currentUser) return;
     getUserInfo();
   }, []);
   return (
