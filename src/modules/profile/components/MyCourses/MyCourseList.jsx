@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUserInfoAPI } from '../../../../apis/userAPI';
 import MyCourseItem from './MyCourseItem';
+import { Typography } from '@material-tailwind/react';
 
 export default function MyCourseList({ watch }) {
   const watchSearchText = watch('searchText');
@@ -42,6 +43,9 @@ export default function MyCourseList({ watch }) {
           />
         );
       })}
+      {!fillCourses.length && (
+        <Typography>Không có khóa học nào đã ghi danh</Typography>
+      )}
     </div>
   );
 }

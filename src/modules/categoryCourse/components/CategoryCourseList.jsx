@@ -71,7 +71,7 @@ export default function CategoryCourseList({ categoryId }) {
           <ComputerDesktopIcon className="w-6 h-6 mr-2 text-colorSecondary-main" />
           {selectedCategory?.tenDanhMuc}
         </Button>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
           {courseList &&
             courseList.map((course) => (
               <CourseItem key={course.maKhoaHoc} course={course} />

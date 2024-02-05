@@ -113,6 +113,7 @@ export default function SidebarNavigate() {
                   'text-primary-main bg-black ': isActive,
                 })
               }
+              onClick={closeDrawer}
             >
               <ListItem>
                 <ListItemPrefix>
@@ -121,7 +122,15 @@ export default function SidebarNavigate() {
                 Quản lí người dùng
               </ListItem>
             </NavLink>
-            <NavLink to="coursemanagement">
+            <NavLink
+              to="coursemanagement"
+              className={({ isActive }) =>
+                classNames('rounded-lg', {
+                  'text-primary-main bg-black ': isActive,
+                })
+              }
+              onClick={closeDrawer}
+            >
               <ListItem>
                 <ListItemPrefix>
                   <BookOpenIcon className="h-5 w-5" />

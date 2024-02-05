@@ -2,7 +2,6 @@ import baseAPI from './baseAPI';
 
 const getListUserPaginationAPI = async (page, limit, searchField) => {
   try {
-    console.log(searchField);
     const { data } = await baseAPI.get(
       '/QuanLyNguoiDung/LayDanhSachNguoiDung_PhanTrang',
       {

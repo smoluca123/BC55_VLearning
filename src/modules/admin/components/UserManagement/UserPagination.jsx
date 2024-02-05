@@ -59,7 +59,7 @@ export default function UserPagination({
           Array.from({ length: totalPage >= 3 ? 3 : totalPage }).map(
             (_page, index) => {
               return (
-                <IconButton {...getItemProps(index + 1)}>
+                <IconButton key={index} {...getItemProps(index + 1)}>
                   {index + 1}
                 </IconButton>
               );

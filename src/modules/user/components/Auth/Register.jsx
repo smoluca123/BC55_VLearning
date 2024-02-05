@@ -20,11 +20,20 @@ import { signin } from '../../slices/authSlice';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const validationSchema = object({
-  taiKhoan: string().required('Tên không được để trống'),
-  matKhau: string().required('Mật khẩu không được để trống'),
+  taiKhoan: string()
+    .required('Tên không được để trống')
+    .min(4, 'Tài khoản quá ngắn'),
+  matKhau: string()
+    .required('Mật khẩu không được để trống')
+    .min(6, 'Mật khẩu phải có ít nhất 6 kí tự'),
   hoTen: string().required('Họ tên không được để trống'),
   soDT: string().required('Số điện thoại không được để trống'),
-  email: string().required('Email không được để trống'),
+  email: string()
+    .required('Email không được để trống')
+    .matches(
+      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      'Email không đúng định dạng'
+    ),
 });
 export default function Register({ onToggle }) {
   const [isLoading, setIsLoading] = useState(false);
