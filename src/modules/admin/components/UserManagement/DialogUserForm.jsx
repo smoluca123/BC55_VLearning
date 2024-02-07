@@ -69,7 +69,6 @@ export default function DialogUserForm({
 
   const handleFormSubmit = async (value) => {
     try {
-      console.log(value);
       if (!selectedUser) {
         await addUserAPI(value);
         handleOpen();
@@ -91,7 +90,6 @@ export default function DialogUserForm({
       try {
         const data = await getUserTypeAPI();
         setTypeUser(data);
-        console.log(data);
         setValue('maLoaiNguoiDung', data[1].maLoaiNguoiDung);
       } catch (error) {
         console.log(error);
