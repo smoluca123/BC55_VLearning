@@ -15,14 +15,15 @@ export default function Auth() {
   );
 
   const handleToggleActive = () => {
+    const param = searchParams.get('from');
+    const urlParam = param ? `&from=${param}` : '';
     !rightActive
-      ? navigate('/user?page=signup')
-      : navigate('/user?page=signin');
+      ? navigate('/user?page=signup' + urlParam)
+      : navigate('/user?page=signin' + urlParam);
 
     setRightActive(!rightActive);
   };
   useEffect(() => {
-    console.log('ags');
     setRightActive(searchParams.get('page') == 'signup' || false);
   }, [searchParams.get('page')]);
 

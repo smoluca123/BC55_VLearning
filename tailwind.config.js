@@ -60,6 +60,7 @@ module.exports = withMT({
         cloudMoveSlow: 'cloudMove 10s linear infinite',
         rotateMessage: 'rotateMessage 4s linear infinite',
         _fadeIn: '_fadeIn 1s linear',
+        _fadeInFast: '_fadeIn 0.2s linear',
       },
     },
   },

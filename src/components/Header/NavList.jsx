@@ -4,10 +4,8 @@ import { ImPencil } from 'react-icons/im';
 import { MdEvent } from 'react-icons/md';
 
 import NavListMenu from './NavListMenu';
-import { MenuItem, Typography } from '@material-tailwind/react';
-import { createElement } from 'react';
-import { NavLink } from 'react-router-dom';
-import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import NavItem from './NavItem';
 
 // nav list component
 const navListItems = [
@@ -31,39 +29,32 @@ const navListItems = [
     href: '/media',
     icon: FaCircleInfo,
   },
+  {
+    label: 'Quản trị',
+    href: '/admin',
+    icon: FaCircleInfo,
+    role: 'GV',
+  },
 ];
 
 export default function NavList() {
+  const { currentUser } = useSelector((state) => state.auth);
+  const maLoaiNguoiDung = currentUser?.maLoaiNguoiDung;
   return (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       <NavListMenu />
-      {navListItems.map(({ label, icon, href = '#' }, key) => (
-        <Typography
-          key={label}
-          variant="small"
-          color="gray"
-          className="font-medium text-blue-gray-500"
-        >
-          <NavLink
-            to={href}
-            key={Math.random() * key}
-            className={({ isActive, isPending }) =>
-              classNames(
-                'text-gray-900 text-center uppercase font-bold group-hover:text-primary-main transition-colors duration-300',
-                {
-                  '!text-primary-main': isActive,
-                  'text-gray-500': isPending,
-                }
-              )
-            }
-          >
-            <MenuItem className="group flex items-center gap-2 lg:rounded-md">
-              {createElement(icon, { className: 'h-[18px] w-[18px]' })}{' '}
-              <span className=""> {label}</span>
-            </MenuItem>
-          </NavLink>
-        </Typography>
-      ))}
+      {navListItems
+        .filter((navItem) => navItem.role !== 'GV')
+        .map((navItem, key) => (
+          <NavItem navItem={navItem} key={Math.random() * key} />
+        ))}
+      {currentUser &&
+        maLoaiNguoiDung === 'GV' &&
+        navListItems
+          .filter((navItem) => navItem.role === 'GV')
+          .map((navItem, key) => (
+            <NavItem navItem={navItem} key={Math.random() * key} />
+          ))}
     </ul>
   );
 }

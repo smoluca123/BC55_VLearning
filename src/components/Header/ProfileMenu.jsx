@@ -39,10 +39,6 @@ export default function ProfileMenu() {
       icon: UserCircleIcon,
     },
     {
-      label: 'Edit Profile',
-      icon: Cog6ToothIcon,
-    },
-    {
       label: 'Sign Out',
       icon: PowerIcon,
       onClick: handleLogout,

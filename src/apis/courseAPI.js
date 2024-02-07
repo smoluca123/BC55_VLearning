@@ -69,7 +69,19 @@ const getCourseDetailAPI = async (courseId) => {
 
 const joinCourseAPI = async (maKhoaHoc, taiKhoan) => {
   try {
-    const { data } = await baseAPI.post('/QuanLyKhoaHoc/GhiDanhKhoaHoc', {
+    const { data } = await baseAPI.post('/QuanLyKhoaHoc/DangKyKhoaHoc', {
+      maKhoaHoc,
+      taiKhoan,
+    });
+    return data;
+  } catch (error) {
+    if (error.response) throw error.response?.data;
+    throw error.message;
+  }
+};
+const leaveCourseAPI = async (maKhoaHoc, taiKhoan) => {
+  try {
+    const { data } = await baseAPI.post('/QuanLyKhoaHoc/HuyGhiDanh', {
       maKhoaHoc,
       taiKhoan,
     });
@@ -85,5 +97,6 @@ export {
   getCourseListPaginationAPI,
   getCourseDetailAPI,
   joinCourseAPI,
+  leaveCourseAPI,
   getCourseListByCategoryAPI,
 };

@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../slices/authSlice';
 import classNames from 'classnames';
 import Swal from 'sweetalert2';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const validationSchema = object({
   taiKhoan: string().required('Tài khoản không được trống'),
@@ -25,7 +26,11 @@ const validationSchema = object({
 export default function Login({ onToggle }) {
   const { currentUser, isLoading, error } = useSelector((state) => state.auth);
   const [isSuccess, setIsSuccess] = useState(false);
+
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -38,9 +43,9 @@ export default function Login({ onToggle }) {
     },
     resolver: yupResolver(validationSchema),
   });
-  const handleLogin = (value) => {
+  const handleLogin = async (value) => {
     try {
-      dispatch(signin(value)).unwrap();
+      await dispatch(signin(value)).unwrap();
       setIsSuccess(true);
       Swal.fire({
         icon: 'success',
@@ -48,6 +53,8 @@ export default function Login({ onToggle }) {
         showConfirmButton: false,
         timer: 1500,
       });
+      const url = searchParams.get('from') || '/';
+      navigate(url);
     } catch (error) {
       console.log(error);
     }

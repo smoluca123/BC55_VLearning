@@ -15,14 +15,37 @@ import {
   ClockIcon,
 } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
-export default function CourseItem({ course }) {
+import { useSelector } from 'react-redux';
+import { leaveCourseAPI } from '../../../../../apis/courseAPI';
+import Swal from 'sweetalert2';
+export default function CourseItem({ course, fetchCourse }) {
   const randomHours = Math.floor(Math.random() * (52 - 8 + 1) + 8);
   const calcWeek = Math.round(randomHours / 24);
-  const formatVND = new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-  });
   const { maKhoaHoc, tenKhoaHoc, hinhAnh, moTa, biDanh } = course;
+
+  const { currentUser } = useSelector((state) => state.auth);
+  const { taiKhoan } = currentUser;
+
+  const leaveCourse = async () => {
+    try {
+      await leaveCourseAPI(maKhoaHoc, taiKhoan);
+      fetchCourse();
+      Swal.fire({
+        icon: 'success',
+        title: 'Đã hủy đăng ký thành công',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: error,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
   return (
     <div>
       <Card className="mt-6 w-full hover:-translate-y-1 transition-transform duration-500">
@@ -72,11 +95,22 @@ export default function CourseItem({ course }) {
           </div>
         </CardBody>
         <CardFooter className="pt-0 ">
-          <Link to={`/course/${biDanh}/${maKhoaHoc}`}>
-            <Button className="mt-4 w-full bg-primary-main hover:bg-white hover:text-black">
-              Xem chi tiết
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link
+              to={`/course/${biDanh}/${maKhoaHoc}`}
+              className="w-full md:w-1/2"
+            >
+              <Button className="mt-4 w-full bg-primary-main hover:bg-white hover:text-black">
+                Xem chi tiết
+              </Button>
+            </Link>
+            <Button
+              onClick={leaveCourse}
+              className="mt-4 w-full md:w-1/2 bg-colorSecondary-main hover:bg-white hover:text-black"
+            >
+              Hủy ghi danh
             </Button>
-          </Link>
+          </div>
         </CardFooter>
       </Card>
       {/* <PopoverUI course={course}>

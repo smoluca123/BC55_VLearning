@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUserInfoAPI } from '../../../../apis/userAPI';
 import MyCourseItem from './MyCourseItem';
+import { Typography } from '@material-tailwind/react';
 
 export default function MyCourseList({ watch }) {
   const watchSearchText = watch('searchText');
@@ -34,8 +35,17 @@ export default function MyCourseList({ watch }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       {fillCourses.map((course) => {
-        return <MyCourseItem course={course} />;
+        return (
+          <MyCourseItem
+            key={course.maKhoaHoc}
+            course={course}
+            fetchCourse={getMyCourses}
+          />
+        );
       })}
+      {!fillCourses.length && (
+        <Typography>Không có khóa học nào đã ghi danh</Typography>
+      )}
     </div>
   );
 }
