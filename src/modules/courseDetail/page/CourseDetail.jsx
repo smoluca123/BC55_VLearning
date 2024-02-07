@@ -28,7 +28,6 @@ export default function CourseDetail() {
       try {
         const data = await getCourseDetailAPI(idCourse);
         setCourse(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }

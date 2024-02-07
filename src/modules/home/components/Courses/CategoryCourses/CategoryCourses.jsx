@@ -38,7 +38,6 @@ export default function CateGoryCourses({ courses }) {
 
   useEffect(() => {
     getCateCourses();
-    console.log(selectedCate);
   }, [selectedCate]);
   return (
     <div className="mt-8">

@@ -50,7 +50,6 @@ export default function CoursesList() {
         searchParams.set('page', '1');
         setTotalPage(null);
         setCourses(null);
-        console.log(error);
       } finally {
         navigate(`?page=${currentPage}&search=${searchText}`);
         setIsLoading(false);

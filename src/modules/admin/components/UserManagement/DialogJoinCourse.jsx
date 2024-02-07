@@ -83,7 +83,6 @@ export default function DialogJoinCourse({
                 label="Chọn khóa học"
                 onChange={(value) => {
                   setSelectedCourseId(value);
-                  console.log(value);
                 }}
               >
                 {coursesList ? (
