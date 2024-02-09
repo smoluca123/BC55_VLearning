@@ -18,6 +18,9 @@ import { signupAPI } from '../../../../apis/userAPI';
 import { useDispatch } from 'react-redux';
 import { signin } from '../../slices/authSlice';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import LoginWithGoogle from './LoginWithGoogle';
+import toast from 'react-hot-toast';
+import LoginWithGithub from './LoginWithGithub/LoginWithGithub';
 
 const validationSchema = object({
   taiKhoan: string()
@@ -38,7 +41,6 @@ const validationSchema = object({
 export default function Register({ onToggle }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -71,15 +73,14 @@ export default function Register({ onToggle }) {
       const _value = { ...value, maNhom: value.maNhom || 'GP01' };
       const data = await signupAPI(_value);
       setIsSuccess(true);
-
       // Sign in
       await dispatch(signin(data)).unwrap();
-
       const url = searchParams.get('from') || '/';
       navigate(url);
+      toast.success('Đăng ký thành công');
     } catch (error) {
       console.log(error);
-      setError({ isError: true, message: error });
+      toast.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -103,7 +104,7 @@ export default function Register({ onToggle }) {
               watch={watch('email')}
             />
             <GroupInput
-              label="Họ tên"
+              label="Full name"
               placeholder="Ex: Luca Nguyễn"
               register={register('hoTen')}
               errors={errors.hoTen}
@@ -125,14 +126,14 @@ export default function Register({ onToggle }) {
               watch={watch('matKhau')}
             />
             <GroupInput
-              label="Số điện thoại"
+              label="Phone number"
               placeholder="Ex: 0909090909"
               register={register('soDT')}
               errors={errors.soDT}
               watch={watch('soDT')}
             />
             <GroupSelect
-              label="Mã Nhóm"
+              label="Group"
               // value=""
               onChange={(value) => {
                 setValue('maNhom', value);
@@ -154,31 +155,11 @@ export default function Register({ onToggle }) {
               })}
             </GroupSelect>
           </div>
-          <Checkbox
-            label={
-              <Typography
-                variant="small"
-                color="gray"
-                className="flex items-center font-normal"
-              >
-                I agree the
-                <a
-                  href="#"
-                  className="font-medium transition-colors hover:text-gray-900"
-                >
-                  &nbsp;Terms and Conditions
-                </a>
-              </Typography>
-            }
-            containerProps={{ className: '-ml-2.5' }}
-          />
-          {isSuccess && (
-            <Alert color="green">Đăng ký thành công, đang đăng nhập...</Alert>
-          )}
-          {error?.isError && <Alert color="red">{error.message}</Alert>}
           <Button type="submit" className="mt-6" fullWidth disabled={isLoading}>
             sign up
           </Button>
+          <LoginWithGoogle>Signup With Google</LoginWithGoogle>
+          <LoginWithGithub>Signup with Github</LoginWithGithub>
           <Typography
             color="gray"
             className=" md:hidden mt-4 text-center font-normal"

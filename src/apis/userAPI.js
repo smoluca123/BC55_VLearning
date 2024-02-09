@@ -79,6 +79,20 @@ const updateUserAPI = async (credentials) => {
   }
 };
 
+const findUserByUsernameAPI = async (username) => {
+  try {
+    const { data } = await baseAPI.get('/QuanLyNguoiDung/TimKiemNguoiDung', {
+      params: {
+        tuKhoa: username,
+      },
+    });
+    return data;
+  } catch (error) {
+    if (error.response) throw error.response?.data;
+    throw error.message;
+  }
+};
+
 export {
   signinAPI,
   signupAPI,
@@ -86,4 +100,5 @@ export {
   updateUserAPI,
   getUserInfoAPI,
   getListUserPaginationAPI,
+  findUserByUsernameAPI,
 };

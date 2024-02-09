@@ -9,13 +9,22 @@ import {
 import TableCourseInActive from './TableCourseInActive';
 import TableCourseActive from './TableCourseActive';
 
-export default function TabCourses({ selectedUser, triggerRender }) {
+export default function TabCourses({
+  selectedUser,
+  triggerRender,
+  onTriggerRender,
+}) {
   const [activeTab, setActiveTab] = useState('courseInactive');
   const data = [
     {
       label: 'Khóa học chờ xác thực',
       value: 'courseInactive',
-      element: <TableCourseInActive selectedUser={selectedUser} />,
+      element: (
+        <TableCourseInActive
+          onTriggerRender={onTriggerRender}
+          selectedUser={selectedUser}
+        />
+      ),
     },
     {
       label: 'Khóa học đã ghi danh',

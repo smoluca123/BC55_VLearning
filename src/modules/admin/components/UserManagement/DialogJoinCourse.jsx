@@ -2,29 +2,17 @@ import {
   Button,
   Dialog,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
-  Input,
-  Checkbox,
   Option,
-  Alert,
-  Spinner,
 } from '@material-tailwind/react';
 import GroupSelect from './components/GroupSelect';
 import { useState, useEffect } from 'react';
 import { getCourseListAPI } from '../../../../apis/courseAPI';
-import { useForm } from 'react-hook-form';
-
-import { useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
-import Swal from 'sweetalert2';
-import TableCourseInActive from './TableCourseInActive';
 import TabCourses from './TabCourses';
 import { addUserToCourseAPI } from '../../../../apis/userManagement';
-import { CheckBadgeIcon, CheckIcon } from '@heroicons/react/24/solid';
-import { XCircleIcon } from '@heroicons/react/24/outline';
 export default function DialogJoinCourse({
   open,
   onOpen: handleOpen,
@@ -107,6 +95,7 @@ export default function DialogJoinCourse({
               Khóa học
             </Typography>
             <TabCourses
+              onTriggerRender={setTriggerRender}
               triggerRender={triggerRender}
               selectedUser={selectedUser}
             />
