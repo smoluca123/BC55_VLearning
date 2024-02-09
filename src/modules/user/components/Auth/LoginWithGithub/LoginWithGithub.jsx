@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../../../../../config/firebaseConfig';
 import githubProvider from './config';
-import { signInWithPopup } from 'firebase/auth';
-import { Button } from '@material-tailwind/react';
+import {
+  getRedirectResult,
+  signInWithPopup,
+  signInWithRedirect,
+} from 'firebase/auth';
+import { Button, Spinner } from '@material-tailwind/react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { signin } from '../../../slices/authSlice';
@@ -11,12 +15,22 @@ import toast from 'react-hot-toast';
 import { FaGithub } from 'react-icons/fa';
 
 export default function LoginWithGithub({ label, children }) {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const loginWithRedirect = async () => {
+    try {
+      await signInWithRedirect(auth, githubProvider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleLoginWithGithub = async () => {
     try {
-      const data = await signInWithPopup(auth, githubProvider);
+      setIsLoading(true);
+      const data = await getRedirectResult(auth);
+      if (!data) return;
       const find = await findUserByUsernameAPI(data.user.email);
       const check = find.find((user) => user.email === data.user.email);
       if (check) {
@@ -42,16 +56,22 @@ export default function LoginWithGithub({ label, children }) {
       toast.success('Đăng nhập thành công');
     } catch (error) {
       toast.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+  useEffect(() => {
+    handleLoginWithGithub();
+  }, []);
   return (
     <div>
       <Button
         className="w-full flex justify-center items-center gap-4"
         color="white"
-        onClick={handleLoginWithGithub}
+        onClick={loginWithRedirect}
+        disabled={!!isLoading}
       >
-        {label || children || 'Login With Github'}{' '}
+        {isLoading ? <Spinner /> : label || children || 'Login With Github'}
         <FaGithub className="w-6 h-6" />
       </Button>
     </div>
