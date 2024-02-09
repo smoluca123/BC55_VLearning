@@ -1,11 +1,4 @@
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-  Alert,
-} from '@material-tailwind/react';
+import { Card, Button, Typography } from '@material-tailwind/react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { object, string } from 'yup';
@@ -15,9 +8,10 @@ import GroupInput from './UI/GroupInput';
 import AuthSection from './UI/AuthSection';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../slices/authSlice';
-import classNames from 'classnames';
-import Swal from 'sweetalert2';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import LoginWithGoogle from './LoginWithGoogle';
+import toast from 'react-hot-toast';
+import LoginWithGithub from './LoginWithGithub/LoginWithGithub';
 
 const validationSchema = object({
   taiKhoan: string().required('Tài khoản không được trống'),
@@ -47,16 +41,12 @@ export default function Login({ onToggle }) {
     try {
       await dispatch(signin(value)).unwrap();
       setIsSuccess(true);
-      Swal.fire({
-        icon: 'success',
-        title: 'Đăng nhập thành công',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      toast.success('Đăng nhập thành công');
       const url = searchParams.get('from') || '/';
       navigate(url);
     } catch (error) {
       console.log(error);
+      toast.error(error.message);
     }
   };
   return (
@@ -71,8 +61,8 @@ export default function Login({ onToggle }) {
         <form className="mt-8 mb-2 " onSubmit={handleSubmit(handleLogin)}>
           <div className="mb-1 flex flex-col gap-6">
             <GroupInput
-              label="Your email"
-              placeholder="abc@cybersoft.edu.vn"
+              label="Username"
+              placeholder="cybersoft"
               register={register('taiKhoan')}
               errors={errors.taiKhoan}
               watch={watch('taiKhoan')}
@@ -86,38 +76,12 @@ export default function Login({ onToggle }) {
               watch={watch('matKhau')}
             />
           </div>
-          <Checkbox
-            label={
-              <Typography
-                variant="small"
-                color="gray"
-                className="flex items-center font-normal"
-              >
-                I agree the
-                <a
-                  href="#"
-                  className="font-medium transition-colors hover:text-gray-900"
-                >
-                  &nbsp;Terms and Conditions
-                </a>
-              </Typography>
-            }
-            containerProps={{ className: '-ml-2.5' }}
-          />
+
           <Button className="mt-6" type="submit" fullWidth disabled={isLoading}>
             login
           </Button>
-
-          {/* Dùng opacity giữ layout không bị giật giật khi alert xuất hiện và ẩn đi - Luca Dev */}
-          <div
-            className={classNames({
-              'opacity-0': !error,
-            })}
-          >
-            <Alert color="red" className="mt-4">
-              {error ?? 'Empty'}
-            </Alert>
-          </div>
+          <LoginWithGoogle />
+          <LoginWithGithub />
 
           <Typography
             color="gray"

@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 
 const TABLE_HEAD = ['STT', 'Tên khóa học', 'Chờ xác nhận'];
 
-export default function TableCourseInActive({ selectedUser }) {
+export default function TableCourseInActive({ selectedUser, onTriggerRender }) {
   const [courseInactive, setCourseInactive] = useState(null);
 
   const getCourseInactiveFromUser = async () => {
@@ -30,6 +30,7 @@ export default function TableCourseInActive({ selectedUser }) {
     try {
       const data = await addUserToCourseAPI(maKhoaHoc, selectedUser?.taiKhoan);
       await getCourseInactiveFromUser();
+      onTriggerRender(Math.random());
       toast.success(data);
     } catch (error) {
       console.log(error);
@@ -43,6 +44,7 @@ export default function TableCourseInActive({ selectedUser }) {
         selectedUser?.taiKhoan
       );
       await getCourseInactiveFromUser();
+      onTriggerRender(Math.random());
       toast.success(data);
     } catch (error) {
       toast.error(error);

@@ -1,6 +1,5 @@
 import { Alert, Input, Typography } from '@material-tailwind/react';
 import classNames from 'classnames';
-import React, { useState } from 'react';
 
 export default function GroupInput({
   label,

@@ -1,6 +1,6 @@
-import { Option, Select, Typography } from '@material-tailwind/react';
+import { Select, Typography } from '@material-tailwind/react';
 import classNames from 'classnames';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 export default function GroupSelect({
   label,
@@ -11,8 +11,6 @@ export default function GroupSelect({
   onChange: _onChange,
   trigger,
 }) {
-  const selectRef = useRef();
-
   return (
     <>
       <Typography
