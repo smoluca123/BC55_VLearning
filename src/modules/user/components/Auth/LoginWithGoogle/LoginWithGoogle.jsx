@@ -14,38 +14,30 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { auth } from '../../../../../config/firebaseConfig';
 import googleProvider from './config';
 import { useEffect, useState } from 'react';
+import CryptoJS from 'crypto-js';
 export default function LoginWithGoogle({ label, children }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const loginWithRedirect = async () => {
+  const loginWithGoogle = async () => {
     try {
-      await signInWithRedirect(auth, googleProvider);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleLoginWithGoogle = async () => {
-    try {
-      //   Phần login bằng gg này backend elearning nó k hỗ trợ api nên e làm tạm bợ get data trả về xong check r gửi đi đăng ký hoặc đăng nhập thôi a :)), chứ k phải thực tế em làm v đâu đừng trừ điểm em tội e nha a Trường :))
-      //   Cộng điểm cho e nha a Trường :)))
       setIsLoading(true);
-      const data = await getRedirectResult(auth);
-      if (!data) return;
+      const data = await signInWithPopup(auth, googleProvider);
       const find = await findUserByUsernameAPI(data.user.email);
       const check = find.find((user) => user.email === data.user.email);
+      const passwordHash = CryptoJS.MD5(data.user.email).toString();
       if (check) {
         const credentials = {
           taiKhoan: data.user.email,
-          matKhau: data.user.uid,
+          matKhau: passwordHash,
         };
         await dispatch(signin(credentials)).unwrap();
       } else {
         const credentials = {
           taiKhoan: data.user.email,
-          matKhau: data.user.uid,
+          matKhau: passwordHash,
           hoTen: data.user.displayName,
           email: data.user.email,
           soDT: data.user.phoneNumber || '0000000000',
@@ -58,22 +50,31 @@ export default function LoginWithGoogle({ label, children }) {
       navigate(url);
       toast.success('Đăng nhập thành công');
     } catch (error) {
-      toast.error(error);
+      if (error.code) {
+        switch (error.code) {
+          case 'auth/account-exists-with-different-credential':
+            toast.error('Email này đã liên kết với phương thức đăng nhập khác');
+            break;
+          case 'auth/popup-closed-by-user':
+            toast.error('Đã hủy đăng nhập');
+            break;
+          default:
+            toast.error('Đăng nhập thất bại');
+        }
+        return;
+      }
+      toast.error(error.message || error);
     } finally {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    handleLoginWithGoogle();
-  }, []);
 
   return (
     <div className="mt-4">
       <Button
         className="w-full flex justify-center items-center gap-4"
         color="white"
-        onClick={loginWithRedirect}
+        onClick={loginWithGoogle}
         disabled={!!isLoading}
       >
         {isLoading ? <Spinner /> : label || children || 'Login With Google'}
