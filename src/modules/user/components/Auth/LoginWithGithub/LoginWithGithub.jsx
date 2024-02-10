@@ -21,7 +21,7 @@ export default function LoginWithGithub({ label, children }) {
   const navigate = useNavigate();
   const loginWithRedirect = async () => {
     try {
-      await signInWithRedirect(auth, githubProvider);
+      await signInWithPopup(auth, githubProvider);
     } catch (error) {
       console.log(error);
     }
