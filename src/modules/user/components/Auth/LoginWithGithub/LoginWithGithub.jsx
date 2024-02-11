@@ -58,7 +58,7 @@ export default function LoginWithGithub({ label, children }) {
         }
         return;
       }
-      toast.error(error.message || error);
+      toast.error(error.message || error || 'Lỗi không xác định');
     } finally {
       setIsLoading(false);
     }
