@@ -12,7 +12,6 @@ export default function ProfileDetail() {
   const getUserData = async () => {
     try {
       const data = await getUserInfoAPI();
-      console.log(data);
       setUserData(data);
     } catch (error) {
       console.log(error);
@@ -26,7 +25,6 @@ export default function ProfileDetail() {
     const getUserType = async () => {
       try {
         const data = await getUserTypeAPI();
-        console.log(data);
         setTypeUser(data);
       } catch (error) {
         console.log(error);
