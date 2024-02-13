@@ -8,4 +8,6 @@
 [Updating]()
 
 # Deploy Project
-[VLearning](https://bc-55-v-learning.vercel.app/)
+[Vercel](https://bc-55-v-learning.vercel.app/)
+[Render](https://vlearning.onrender.com/)
+[Domain](https://vlearning.smoteam.com)
