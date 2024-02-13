@@ -91,7 +91,77 @@ const leaveCourseAPI = async (maKhoaHoc, taiKhoan) => {
     throw error.message;
   }
 };
+const deleteCourseAPI = async (idKhoaHoc) => {
+  try {
+    const { data } = await baseAPI.delete('QuanLyKhoaHoc/XoaKhoaHoc', {
+      params: {
+        MaKhoaHoc: idKhoaHoc,
+      },
+    });
+    return data.content;
+  } catch (error) {
+    if (error.response) {
+      throw error.response?.data;
+    }
+    throw error;
+  }
+};
+const addCourseAPI = async (course) => {
+  try {
+    const formDataCourse = new FormData();
+    // console.log(course);
+    for (const key in course) {
+      formDataCourse.append(key, course[key]);
+    }
+    console.log(formDataCourse.get('hinhAnh'));
+    const { data } = await baseAPI.post(
+      '/QuanLyKhoaHoc/ThemKhoaHocUploadHinh',
+      formDataCourse
+    );
+    return data.content;
+  } catch (error) {
+    if (error.response) {
+      throw error.response?.data;
+    }
+    throw error;
+  }
+};
+
+const updateCourseAPI = async (course) => {
+  try {
+    let formDataCourse = course;
+    if (typeof course.hinhAnh !== 'string') {
+      formDataCourse = new FormData();
+      for (const key in course) {
+        formDataCourse.append(key, course[key]);
+      }
+      const { data } = await baseAPI.post(
+        '/QuanLyKhoaHoc/CapNhatKhoaHocUpload',
+        formDataCourse
+      );
+      return data;
+    }
+    // tay dibien_gp01 png
+    // const hinhAnhNameSplit = formDataCourse.hinhAnh.split('.');
+    // hinhAnhNameSplit[hinhAnhNameSplit.length - 2] += '_gp01';
+    // const hinhAnh = hinhAnhNameSplit.join('.');
+    // formDataCourse.hinhAnh = hinhAnh
+    // formDataCourse.hinhAnh += '_'
+    const { data } = await baseAPI.put(
+      '/QuanLyKhoaHoc/CapNhatKhoaHoc',
+      formDataCourse
+    );
+    return data;
+  } catch (error) {
+    if (error.response) {
+      throw error.response?.data;
+    }
+    throw error;
+  }
+};
+
 export {
+  deleteCourseAPI,
   getCourseCategoryAPI,
   getCourseListAPI,
   getCourseListPaginationAPI,
@@ -99,4 +169,6 @@ export {
   joinCourseAPI,
   leaveCourseAPI,
   getCourseListByCategoryAPI,
+  addCourseAPI,
+  updateCourseAPI,
 };

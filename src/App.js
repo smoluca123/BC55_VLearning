@@ -15,6 +15,7 @@ import PrivateAdminRouter from './Router/PrivateAdminRouter';
 import AdminLayout from './modules/layout/pages/AdminLayout';
 import Admin from './modules/admin/pages/Admin';
 import UserManagement from './modules/admin/components/UserManagement';
+import CourseManagement from './modules/admin/components/CourseManagement';
 
 const { BrowserRouter, Routes, Route } = require('react-router-dom');
 
@@ -60,6 +61,7 @@ function App() {
             >
               <Route index element={<Admin />} />
               <Route path="usermanagement" element={<UserManagement />} />
+              <Route path="coursemanagement" element={<CourseManagement />} />
             </Route>
             <Route path="*" element={<Home />} />
           </Route>

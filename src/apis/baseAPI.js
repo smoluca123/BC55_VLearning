@@ -25,7 +25,7 @@ baseAPI.interceptors.request.use(
 baseAPI.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401) {
       localStorage.removeItem('currentUser');
       window.location.reload();
     }
