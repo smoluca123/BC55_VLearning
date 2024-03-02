@@ -16,13 +16,29 @@ import AdminLayout from './modules/layout/pages/AdminLayout';
 import Admin from './modules/admin/pages/Admin';
 import UserManagement from './modules/admin/components/UserManagement';
 import CourseManagement from './modules/admin/components/CourseManagement';
+import { useEffect } from 'react';
 
-const { BrowserRouter, Routes, Route } = require('react-router-dom');
+const {
+  BrowserRouter,
+  Routes,
+  Route,
+  useLocation,
+} = require('react-router-dom');
 
 function App() {
+  const ScrollToTopOnPathChange = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  };
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <ScrollToTopOnPathChange />
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />

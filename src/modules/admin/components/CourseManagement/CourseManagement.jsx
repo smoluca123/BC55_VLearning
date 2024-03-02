@@ -22,7 +22,6 @@ import { useEffect, useState, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import {
   getCourseCategoryAPI,
-  getCourseListAPI,
   getCourseListPaginationAPI,
 } from '../../../../apis/courseAPI';
 import DialogAddCourse from './DialogAddCourse';
@@ -90,14 +89,14 @@ export default function CourseManagement() {
   useEffect(() => {
     fetchCourse();
     navigate(`?page=${currentPage}`);
-  }, [searchText, currentPage]);
+  }, [currentPage]);
   useEffect(() => {
     const pageParam = searchParams.get('page');
     if (pageParam) {
       const parsedPage = parseInt(pageParam, 10);
       setCurrentPage(parsedPage);
     }
-  }, []);
+  }, [searchParams]);
   //  danh muc khoa oc
   useEffect(() => {
     const getCategoriesData = async () => {
@@ -112,7 +111,7 @@ export default function CourseManagement() {
   }, []);
   const handleSearch = () => {
     if (searchText.trim() === '') {
-      setCourseList(courseList);
+      fetchCourse();
     } else {
       const filteredCourses = courseList.filter((course) =>
         course.tenKhoaHoc.toLowerCase().includes(searchText.toLowerCase())
@@ -137,10 +136,10 @@ export default function CourseManagement() {
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-              Members list
+              Course list
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              See information about all members
+              See information about all courses
             </Typography>
           </div>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row">

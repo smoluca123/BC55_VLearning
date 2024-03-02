@@ -159,7 +159,9 @@ export default function Register({ onToggle }) {
             sign up
           </Button>
           <LoginWithGoogle>Signup With Google</LoginWithGoogle>
-          <LoginWithGithub>Signup with Github</LoginWithGithub>
+          <div className="mt-2">
+            <LoginWithGithub>Signup with Github</LoginWithGithub>
+          </div>
           <Typography
             color="gray"
             className=" md:hidden mt-4 text-center font-normal"
