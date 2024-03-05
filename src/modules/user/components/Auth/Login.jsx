@@ -81,7 +81,9 @@ export default function Login({ onToggle }) {
             login
           </Button>
           <LoginWithGoogle />
-          <LoginWithGithub />
+          <div className="mt-2">
+            <LoginWithGithub />
+          </div>
 
           <Typography
             color="gray"

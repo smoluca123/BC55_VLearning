@@ -120,7 +120,7 @@ export default function DialogEditCourse({
                 color="blue-gray "
                 className="uppercase text-center"
               >
-                Thêm khoá học
+                Cập nhật khoá học
               </Typography>
               <div className="grid grid-cols-2 gap-4">
                 <div>

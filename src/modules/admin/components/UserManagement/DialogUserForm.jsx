@@ -8,15 +8,22 @@ import {
   Typography,
   Option,
   Alert,
+  IconButton,
 } from '@material-tailwind/react';
 import GroupInput from './components/GroupInput';
 import GroupSelect from './components/GroupSelect';
 import { useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getUserTypeAPI, updateUserAPI } from '../../../../apis/userAPI';
+import {
+  findUserByUsernameAPI,
+  getUserInfoAPI,
+  getUserTypeAPI,
+  updateUserAPI,
+} from '../../../../apis/userAPI';
 import { addUserAPI } from '../../../../apis/userManagement';
 import toast from 'react-hot-toast';
+import { XCircleIcon } from '@heroicons/react/24/outline';
 
 const validationSchema = object({
   taiKhoan: string()
@@ -51,6 +58,7 @@ export default function DialogUserForm({
     setValue,
     reset,
     watch,
+    trigger,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -100,6 +108,22 @@ export default function DialogUserForm({
 
   useEffect(() => {
     if (!selectedUser) {
+      return;
+    }
+    const getDataUser = async () => {
+      try {
+        const { taiKhoan } = selectedUser;
+        const data = await findUserByUsernameAPI(taiKhoan);
+        setValue('matKhau', data[0].matKhau);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDataUser();
+  }, [selectedUser]);
+
+  useEffect(() => {
+    if (!selectedUser) {
       reset();
       return;
     }
@@ -108,6 +132,7 @@ export default function DialogUserForm({
         continue;
       }
       setValue(key, selectedUser[key]);
+      trigger(key);
     }
   }, [selectedUser]);
 
@@ -121,15 +146,21 @@ export default function DialogUserForm({
       >
         <Card className="mx-auto w-full h-full">
           <CardBody className="flex flex-col gap-4">
-            <Typography variant="h4" color="blue-gray">
-              Thêm người dùng
-            </Typography>
+            <div className="flex justify-between">
+              <Typography variant="h4" color="blue-gray">
+                {selectedUser ? 'Cập nhật' : 'Thêm'} người dùng
+              </Typography>
+              <IconButton color="red" onClick={handleOpen}>
+                <XCircleIcon className="w-6 h-6" />
+              </IconButton>
+            </div>
             <Typography
               className="mb-3 font-normal"
               variant="paragraph"
               color="gray"
             >
-              Thêm người dùng vào hệ thống
+              {selectedUser ? 'Cập nhật' : 'Thêm'} người dùng{' '}
+              {!selectedUser && 'vào hệ thống'}
             </Typography>
             <form onSubmit={handleSubmit(handleFormSubmit)}>
               <GroupInput

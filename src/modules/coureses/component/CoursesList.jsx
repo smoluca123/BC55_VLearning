@@ -76,7 +76,7 @@ export default function CoursesList() {
             courses.map((course) => (
               <CourseItem key={course.maKhoaHoc} course={course} />
             ))}
-          {(!courses || isLoading) &&
+          {(!courses && isLoading) &&
             Array.from({ length: 8 }).map((_, index) => (
               <CourseSkeleton key={Math.random() * index} />
             ))}
